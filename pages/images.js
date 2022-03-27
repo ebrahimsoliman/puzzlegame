@@ -6,7 +6,7 @@ import ReactCardFlip from "react-card-flip";
 import socketIOClient from "socket.io-client";
 
 
-const ios = socketIOClient('http://192.168.4.21:1339')
+const ios = socketIOClient('https://flipbk.inteligencia.co.uk')
 
 function Images() {
     const dispatch = useDispatch()
