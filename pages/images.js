@@ -53,10 +53,10 @@ function Images() {
                         isFlipped={e.attributes.front_face}
                         flipDirection="horizontal">
                         <img style={{height: 'auto', width: '100%', maxHeight: '24vh'}}
-                             src={'http://192.168.4.21:1339' + e.attributes.front.data.attributes.url}
+                             src={'https://flipbk.inteligencia.co.uk' + e.attributes.front.data.attributes.url}
                              alt=""/>
                         <img style={{height: 'auto', width: '100%', maxHeight: '24vh'}}
-                             src={'http://192.168.4.21:1339' + e.attributes.back.data.attributes.url}
+                             src={'https://flipbk.inteligencia.co.uk' + e.attributes.back.data.attributes.url}
                              alt=""/>
                     </ReactCardFlip>
                 </Grid>)}
