@@ -3,7 +3,7 @@ import ContentService from '../../../../services/contentService'
 import socketIOClient from "socket.io-client";
 
 
-const ios = socketIOClient('http://192.168.4.21:1339')
+const ios = socketIOClient('https://flipbk.inteligencia.co.uk')
 
 export const home = () => async (dispatch) => {
     try {

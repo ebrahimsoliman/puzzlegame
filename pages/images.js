@@ -1,7 +1,7 @@
-import React, {Fragment, useEffect} from 'react';
-import {Grid} from "@mui/material";
+import React, {useEffect, useState} from 'react';
+import {Box, Grid} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {home, update} from "../store/modules/content/actions";
+import {home} from "../store/modules/content/actions";
 import ReactCardFlip from "react-card-flip";
 import socketIOClient from "socket.io-client";
 
@@ -19,36 +19,50 @@ function Images() {
         },
         [])
     const homeContent = useSelector((state => state.contentReducer)).home.data
-
+    const [cont, setCont] = useState([])
+    useEffect(() => {
+            if (homeContent) {
+                setCont([homeContent.splice(0,
+                    6), homeContent.splice(0,
+                    6), homeContent.splice(0,
+                    6), homeContent.splice(0,
+                    6)])
+            }
+            console.log(cont)
+        },
+        [homeContent])
     return (
-        <Fragment>
-            <Grid container spacing={0}>
-                {homeContent?.map(e =>
+        <Box style={{
 
-                    <Grid  xs={2} item key={e.attributes.content}
+            height: '100vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}><Box>
+            {cont?.map((
+                arr,
+                index
+            ) => <Grid key={index}
+                       container
+                       justifyContent={"center"}
+            >
+                {arr.map(e => <Grid item
+                                    xs={2}
+                                    key={e.attributes.content}>
+                    <ReactCardFlip
+                        isFlipped={e.attributes.front_face}
+                        flipDirection="horizontal">
+                        <img style={{height: 'auto', width: '100%', maxHeight: '24vh'}}
+                             src={'http://192.168.4.21:1339' + e.attributes.front.data.attributes.url}
+                             alt=""/>
+                        <img style={{height: 'auto', width: '100%', maxHeight: '24vh'}}
+                             src={'http://192.168.4.21:1339' + e.attributes.back.data.attributes.url}
+                             alt=""/>
+                    </ReactCardFlip>
+                </Grid>)}
+            </Grid>)}
 
-
-                        /*onClick={() => {
-                              dispatch(update({
-                                      ...e,
-                                      front_face: !e.attributes.front_face
-                                  },
-                                  e.id)), ios.emit("updated")
-                          }}*/>
-                        <ReactCardFlip
-                            isFlipped={e.attributes.front_face}
-                            flipDirection="horizontal">
-                            <img style={{width: '100%'}}
-                                 src={'http://192.168.4.21:1339'+e.attributes.front.data.attributes.url}
-                                 alt=""/>
-                            <img style={{width: '100%'}}
-                                 src={'http://192.168.4.21:1339'+e.attributes.back.data.attributes.url}
-                                 alt=""/>
-                        </ReactCardFlip>
-                    </Grid>)}
-
-            </Grid>
-        </Fragment>
+        </Box></Box>
     );
 }
 
