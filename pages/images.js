@@ -16,8 +16,10 @@ function Images() {
                 e => {
                     dispatch(home())
                 })
+
         },
         [])
+
     const homeContent = useSelector((state => state.contentReducer)).home.data
     const [cont, setCont] = useState([])
     useEffect(() => {

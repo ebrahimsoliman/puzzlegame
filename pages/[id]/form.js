@@ -12,10 +12,8 @@ function Form() {
     const dispatch = useDispatch()
     const router = useRouter()
     let campid = router.query.id
-
     const error = useSelector((state => state.contentReducer)).error
     const questions = useSelector((state => state.contentReducer)).question.data?.attributes.question
-
     useEffect(() => {
             if (error.isError === false) {
                 router.push('/success')
@@ -23,6 +21,9 @@ function Form() {
         },
         [error.isError])
     useEffect(() => {
+            if (campid > 24 || campid <= 0) {
+                router.push('/404')
+            }
             if (campid) {
                 dispatch(question(campid))
             }
@@ -71,7 +72,6 @@ function Form() {
                             color='secondary'
                             type={'submit'}
                             sx={{textTransform: 'capitalize'}}>Answer</Button>
-
                     <FormHelperText sx={{
                         ml: '14px',
                         mt: '20px',
