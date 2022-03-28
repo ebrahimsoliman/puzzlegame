@@ -39,6 +39,7 @@ export const answer = (
         await ContentService.answer(data,
             id);
         dispatch(home())
+
         dispatch({
                 type: SET_ERROR,
                 payload: {
@@ -48,10 +49,11 @@ export const answer = (
         );
         ios.emit("updated")
     } catch (e) {
+        console.log(e.response.data.error)
         dispatch({
                 type: SET_ERROR,
                 payload: {
-                    error: {message: 'Incorrect Answer', isError: true},
+                    error: {message: e.response.data.error.message, isError: true},
                 }
             }
         )
@@ -62,7 +64,7 @@ export const question = (
     id
 ) => async (dispatch) => {
     try {
-       let res =  await ContentService.question(id);
+        let res = await ContentService.question(id);
         dispatch({
             type: QUESTION,
             payload: res.data
